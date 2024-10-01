@@ -1,0 +1,24 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/1/And.hdl
+/**
+ * And gate:
+ * if (a and b) out = 1, else out = 0 
+ */
+
+CHIP And {
+
+IN a, b;
+OUT out;
+
+PARTS:
+//First the two global inputs are put through the input pins of a nand gate.
+//If both inputs are true, the output will be false. Otherwise the output 
+//will be true.
+Nand(a=a, b=b, out=notand);
+//Since the output of the previous chip in the sequence is the opposite of 
+//the desired output, we funnel the output of the nand chip through a Not
+//chip in order to get the desired global out. 
+Not(in=notand, out=out);
+}
